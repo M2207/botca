@@ -4,6 +4,7 @@ import asyncio
 import requests
 import random as r
 import sqlite3
+import os
 
 
 client = commands.Bot(command_prefix='/')
