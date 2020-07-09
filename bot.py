@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
+import os
 
-token = ''
 client = commands.Bot(command_prefix='/')
 
 
@@ -95,6 +95,6 @@ async def unmute_error(ctx, error):
     if isinstance( error, commands.MissingPermissions ):
         await ctx.send(embed = discord.Embed(description = f'**:exclamation: {ctx.author.name},у вас нет прав для использования данной команды.**', color=0x0c0c0c))
 
-
-
-client.run(token)
+	
+token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
+client.run(str(token)) # запускаем бота
