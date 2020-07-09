@@ -4,3 +4,4 @@ websockets
 chardet
 asyncio
 nekos.py
+sqlite3
