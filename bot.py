@@ -6,7 +6,6 @@ import random as r
 import sqlite3
 
 
-token = 'NzMwNDM4MzQ4NjMxNTcyNTkz.XwXgdA.iWUinkNT54CmB7xmUM6TKq1pAvU'
 client = commands.Bot(command_prefix='/')
 
 
