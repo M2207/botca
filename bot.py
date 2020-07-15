@@ -352,6 +352,7 @@ async def serverinfo(ctx):
 
 
 @client.command()
+@commands.has_permissions( administrator = True)
 async def ban(ctx, member: discord.Member, *, reason = None):
 	if member.id == ctx.author.id:
 		return await ctx.send("ты даун?")
