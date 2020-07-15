@@ -351,6 +351,22 @@ async def serverinfo(ctx):
     await ctx.send(embed=embed)
 
 
+@client.command()
+async def ban(ctx, member: discord.Member, *, reason = None):
+	if member.id == ctx.author.id:
+		return await ctx.send("ты даун?")
+	if member.id == ctx.guild.owner.id:
+		return await ctx.send("Я не буду банить создателя сервера...")
+	if ctx.author.top_role.position < member.top_role.position:
+		return await ctx.send("Я не буду банить человека который выше тебя по должности!")
+	guild_msg=discord.Embed(description=f"{ctx.author.mention} забанил участника {member.mention} по причине: {reason}")
+	dm_msg=discord.Embed(description=f"Вы были забанены на сервере {ctx.guild.name}, модератором {ctx.author.mention}, по причине: {reason}")
+	if reason is None:
+		reason="Не указана"
+	await member.ban(member, reason=reason)
+	await ctx.send(embed=guild_msg)
+	await member.send(embed=dm_msg)
+
 	
 token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
 client.run(str(token)) # запускаем бота
