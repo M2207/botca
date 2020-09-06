@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix='/')
 async def on_ready(*args):
     print ( 'Бот Подключён!Можно работать.' )
     type = discord.ActivityType.watching
-    activity = discord.Activity(name = "на маму Ярика)00", type = type)
+    activity = discord.Activity(name = "...", type = type)
     status = discord.Status.dnd
     await client.change_presence(activity = activity, status = status)
 
