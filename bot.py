@@ -25,7 +25,7 @@ async def on_member_join( member ):
     emb = discord.Embed( description = f"**<:3772_TsukimiyaSip:730480801011204216> Пользователь **{member.mention}**, присоединился к серверу!<:3772_TsukimiyaSip:730480801011204216> **", color = 0x0c0c0c )
     
 
-    channel = client.get_channel( 729691962344472596 ) # Айди канала куда будет писаться сообщение
+    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
     await channel.send( embed = emb )
 
 
@@ -34,7 +34,7 @@ async def on_member_remove( member ):
     emb = discord.Embed( description = f"**<:leave:730480292736925716> Пользователь **{member.mention}**, покинул сервер!<:leave:730480292736925716> **", color = 0x0c0c0c )
     
 
-    channel = client.get_channel( 729691962344472596 ) # Айди канала куда будет писаться сообщение
+    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
     await channel.send( embed = emb )
 
 
