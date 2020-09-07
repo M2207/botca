@@ -1,3 +1,5 @@
+
+  
 import discord
 from discord.ext import commands
 import asyncio
@@ -22,7 +24,7 @@ async def on_ready(*args):
 
 @client.event
 async def on_member_join( member ):
-    emb = discord.Embed( description = f"**<:3772_TsukimiyaSip:730480801011204216> Пользователь **{member.mention}**, присоединился к серверу!<:3772_TsukimiyaSip:730480801011204216> **", color = 0x0c0c0c )
+    emb = discord.Embed( description = f"**<:dancing_lizard:752155282615828530> Пользователь **{member.mention}**, присоединился к серверу!<:dancing_lizard:752155282615828530> **", color = 0x0c0c0c )
     
 
     channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
@@ -31,7 +33,7 @@ async def on_member_join( member ):
 
 @client.event
 async def on_member_remove( member ):
-    emb = discord.Embed( description = f"**<:leave:730480292736925716> Пользователь **{member.mention}**, покинул сервер!<:leave:730480292736925716> **", color = 0x0c0c0c )
+    emb = discord.Embed( description = f"**<:sad:752157651617579079> Пользователь **{member.mention}**, покинул сервер!<:sad:752157651617579079> **", color = 0x0c0c0c )
     
 
     channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
@@ -40,7 +42,7 @@ async def on_member_remove( member ):
 
 @client.event
 async def on_message_delete(message):
-    channel = client.get_channel(729691763500908636)
+    channel = client.get_channel(752163948899598386)
     if message.content is None:
         return
     emb = discord.Embed(colour=0xff0000,
@@ -60,7 +62,7 @@ async def on_message_delete(message):
 @commands.has_permissions( administrator = True)
 async def clear(ctx,amount : int):
     await ctx.channel.purge( limit = amount )
-    await ctx.send(embed = discord.Embed(description = f'**<a:pingin:730480224898252840> Удалено сообщений {amount}**', color=0x00FFFF))
+    await ctx.send(embed = discord.Embed(description = f'**<a:chistim:752537480116568172> Удалено сообщений {amount}**', color=0x00FFFF))
 
 
 
@@ -71,7 +73,7 @@ async def tempmute(ctx, member : discord.Member, time:int, arg:str, *, reason=No
 
     Переменная_размут = f'**Вы были размучены на сервере {ctx.guild.name}**'
     Переменная_мут = f'**Вы были замучены на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-    mute_role = discord.utils.get( ctx.message.guild.roles, id = 730483853453688892 )
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 752531904292585575 )
 
     await member.add_roles(mute_role, reason=None, atomic=True)
     await ctx.send(embed = discord.Embed(description = f'**:shield:Мут пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
@@ -113,7 +115,7 @@ async def unmute(ctx,member: discord.Member = None):
 
     else:
 
-        mute_role = discord.utils.get(member.guild.roles, id = 730483853453688892) #Айди роли
+        mute_role = discord.utils.get(member.guild.roles, id = 752531904292585575) #Айди роли
 
     await member.remove_roles( mute_role )
     await ctx.send(embed = discord.Embed(description = f'**:shield: Пользователю {member.mention} был вернут доступ к чатам.**', color=0x0c0c0c))    
@@ -134,6 +136,8 @@ async def сказать(ctx, member: discord.Member = None, *, reason=None):
     emb = discord.Embed(description= f'**<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>{reason}<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>**', color=0x6fdb9e)
     await member.send(embed=emb)
 
+‎‎‎‎
+‎‎‎‎
 
 @сказать.error 
 async def сказать(ctx, error):
@@ -161,7 +165,7 @@ async def __voice(ctx, member : discord.Member, time:int, arg:str, *, reason=Non
 
     Переменная_размут = f'**У вас был снят мут войса на сервере {ctx.guild.name}**'
     Переменная_мут = f'**Вам выдали мут войса на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-    mute_role = discord.utils.get( ctx.message.guild.roles, id = 730734953125380167 )
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 752538209589657672 )
 
     await member.add_roles(mute_role, reason=None, atomic=True)
     await ctx.send(embed = discord.Embed(description = f'**:shield:Мут войса пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
