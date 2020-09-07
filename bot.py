@@ -1,3 +1,38 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@clown338 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+clown338
+/
+botca
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+botca/bot.py /
+@clown338
+clown338 Update bot.py
+Latest commit 2da1e42 yesterday
+ History
+ 1 contributor
+250 lines (180 sloc)  11.6 KB
+  
 import discord
 from discord.ext import commands
 import asyncio
@@ -59,8 +94,8 @@ async def on_message_delete(message):
 @client.command()
 @commands.has_permissions( administrator = True)
 async def clear(ctx,amount : int):
-	await ctx.channel.purge( limit = amount )
-	await ctx.send(embed = discord.Embed(description = f'**<a:pingin:730480224898252840> Удалено сообщений {amount}**', color=0x00FFFF))
+    await ctx.channel.purge( limit = amount )
+    await ctx.send(embed = discord.Embed(description = f'**<a:pingin:730480224898252840> Удалено сообщений {amount}**', color=0x00FFFF))
 
 
 
@@ -69,31 +104,31 @@ async def clear(ctx,amount : int):
 async def tempmute(ctx, member : discord.Member, time:int, arg:str, *, reason=None):
 
 
-	Переменная_размут = f'**Вы были размучены на сервере {ctx.guild.name}**'
-	Переменная_мут = f'**Вы были замучены на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-	mute_role = discord.utils.get( ctx.message.guild.roles, id = 730483853453688892 )
+    Переменная_размут = f'**Вы были размучены на сервере {ctx.guild.name}**'
+    Переменная_мут = f'**Вы были замучены на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 730483853453688892 )
 
-	await member.add_roles(mute_role, reason=None, atomic=True)
-	await ctx.send(embed = discord.Embed(description = f'**:shield:Мут пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
-	await member.send(embed = discord.Embed(description = f'{Переменная_мут}', color=0x0c0c0c))
+    await member.add_roles(mute_role, reason=None, atomic=True)
+    await ctx.send(embed = discord.Embed(description = f'**:shield:Мут пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
+    await member.send(embed = discord.Embed(description = f'{Переменная_мут}', color=0x0c0c0c))
 
-	if arg == "s":
-		await asyncio.sleep(time)          
-	elif arg == "m":
-		await asyncio.sleep(time * 60)
-	elif arg == "h":
-		await asyncio.sleep(time * 60 * 60)
-	elif arg == "d":
-		await asyncio.sleep(time * 60 * 60 * 24)
-	elif arg == "y":
-		await asyncio.sleep(time * 60 * 60 * 24 * 365)
-	elif arg == "v":
-		await asyncio.sleep(time * 60 * 60 * 24 * 365 * 100)
+    if arg == "s":
+        await asyncio.sleep(time)          
+    elif arg == "m":
+        await asyncio.sleep(time * 60)
+    elif arg == "h":
+        await asyncio.sleep(time * 60 * 60)
+    elif arg == "d":
+        await asyncio.sleep(time * 60 * 60 * 24)
+    elif arg == "y":
+        await asyncio.sleep(time * 60 * 60 * 24 * 365)
+    elif arg == "v":
+        await asyncio.sleep(time * 60 * 60 * 24 * 365 * 100)
 
 
-	await member.remove_roles( mute_role )
-	await ctx.send(embed = discord.Embed(description = f'**:white_check_mark:Мут у пользователя {member.mention} успешно снят!:white_check_mark:**', color=0x800080))
-	await member.send(embed = discord.Embed(description = f'{Переменная_размут}', color=0x800080))
+    await member.remove_roles( mute_role )
+    await ctx.send(embed = discord.Embed(description = f'**:white_check_mark:Мут у пользователя {member.mention} успешно снят!:white_check_mark:**', color=0x800080))
+    await member.send(embed = discord.Embed(description = f'{Переменная_размут}', color=0x800080))
 
 @tempmute.error 
 async def tempmute_error(ctx, error):
@@ -107,16 +142,16 @@ async def tempmute_error(ctx, error):
 @commands.has_permissions( administrator = True) 
 async def unmute(ctx,member: discord.Member = None): 
 
-	if member is None:
+    if member is None:
 
-		await ctx.send(embed = discord.Embed(description = '**:grey_exclamation: Обязательно укажите: пользователя!**'))
+        await ctx.send(embed = discord.Embed(description = '**:grey_exclamation: Обязательно укажите: пользователя!**'))
 
-	else:
+    else:
 
-		mute_role = discord.utils.get(member.guild.roles, id = 730483853453688892) #Айди роли
+        mute_role = discord.utils.get(member.guild.roles, id = 730483853453688892) #Айди роли
 
-	await member.remove_roles( mute_role )
-	await ctx.send(embed = discord.Embed(description = f'**:shield: Пользователю {member.mention} был вернут доступ к чатам.**', color=0x0c0c0c))    
+    await member.remove_roles( mute_role )
+    await ctx.send(embed = discord.Embed(description = f'**:shield: Пользователю {member.mention} был вернут доступ к чатам.**', color=0x0c0c0c))    
 
 # Работа с ошибками размута
 
@@ -159,31 +194,31 @@ async def avatar(ctx, member : discord.Member = None):
 @commands.has_permissions( administrator = True)
 async def __voice(ctx, member : discord.Member, time:int, arg:str, *, reason=None):
 
-	Переменная_размут = f'**У вас был снят мут войса на сервере {ctx.guild.name}**'
-	Переменная_мут = f'**Вам выдали мут войса на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-	mute_role = discord.utils.get( ctx.message.guild.roles, id = 730734953125380167 )
+    Переменная_размут = f'**У вас был снят мут войса на сервере {ctx.guild.name}**'
+    Переменная_мут = f'**Вам выдали мут войса на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 730734953125380167 )
 
-	await member.add_roles(mute_role, reason=None, atomic=True)
-	await ctx.send(embed = discord.Embed(description = f'**:shield:Мут войса пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
-	await member.send(embed = discord.Embed(description = f'{Переменная_мут}', color=0x0c0c0c))
+    await member.add_roles(mute_role, reason=None, atomic=True)
+    await ctx.send(embed = discord.Embed(description = f'**:shield:Мут войса пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
+    await member.send(embed = discord.Embed(description = f'{Переменная_мут}', color=0x0c0c0c))
 
-	if arg == "s":
-		await asyncio.sleep(time)          
-	elif arg == "m":
-		await asyncio.sleep(time * 60)
-	elif arg == "h":
-		await asyncio.sleep(time * 60 * 60)
-	elif arg == "d":
-		await asyncio.sleep(time * 60 * 60 * 24)
-	elif arg == "y":
-		await asyncio.sleep(time * 60 * 60 * 24 * 365)
-	elif arg == "v":
-		await asyncio.sleep(time * 60 * 60 * 24 * 365 * 100)
+    if arg == "s":
+        await asyncio.sleep(time)          
+    elif arg == "m":
+        await asyncio.sleep(time * 60)
+    elif arg == "h":
+        await asyncio.sleep(time * 60 * 60)
+    elif arg == "d":
+        await asyncio.sleep(time * 60 * 60 * 24)
+    elif arg == "y":
+        await asyncio.sleep(time * 60 * 60 * 24 * 365)
+    elif arg == "v":
+        await asyncio.sleep(time * 60 * 60 * 24 * 365 * 100)
 
 
-	await member.remove_roles( mute_role )
-	await ctx.send(embed = discord.Embed(description = f'**:white_check_mark:Мут войса у пользователя {member.mention} успешно снят!:white_check_mark:**', color=0x800080))
-	await member.send(embed = discord.Embed(description = f'{Переменная_размут}', color=0x800080))
+    await member.remove_roles( mute_role )
+    await ctx.send(embed = discord.Embed(description = f'**:white_check_mark:Мут войса у пользователя {member.mention} успешно снят!:white_check_mark:**', color=0x800080))
+    await member.send(embed = discord.Embed(description = f'{Переменная_размут}', color=0x800080))
 
 @__voice.error 
 async def __voice_error(ctx, error):
@@ -231,20 +266,32 @@ async def serverinfo(ctx):
 @client.command()
 @commands.has_permissions( administrator = True)
 async def ban(ctx, member: discord.Member, *, reason = None):
-	if member.id == ctx.author.id:
-		return await ctx.send("ты даун?")
-	if member.id == ctx.guild.owner.id:
-		return await ctx.send("Я не буду банить создателя сервера...")
-	if ctx.author.top_role.position < member.top_role.position:
-		return await ctx.send("Я не буду банить человека который выше тебя по должности!")
-	guild_msg=discord.Embed(description=f"{ctx.author.mention} забанил участника {member.mention} по причине: {reason}")
-	dm_msg=discord.Embed(description=f"Вы были забанены на сервере {ctx.guild.name}, модератором {ctx.author.mention}, по причине: {reason}")
-	if reason is None:
-		reason="Не указана"
-	await member.ban(member, reason=reason)
-	await ctx.send(embed=guild_msg)
-	await member.send(embed=dm_msg)
+    if member.id == ctx.author.id:
+        return await ctx.send("ты даун?")
+    if member.id == ctx.guild.owner.id:
+        return await ctx.send("Я не буду банить создателя сервера...")
+    if ctx.author.top_role.position < member.top_role.position:
+        return await ctx.send("Я не буду банить человека который выше тебя по должности!")
+    guild_msg=discord.Embed(description=f"{ctx.author.mention} забанил участника {member.mention} по причине: {reason}")
+    dm_msg=discord.Embed(description=f"Вы были забанены на сервере {ctx.guild.name}, модератором {ctx.author.mention}, по причине: {reason}")
+    if reason is None:
+        reason="Не указана"
+    await member.ban(member, reason=reason)
+    await ctx.send(embed=guild_msg)
+    await member.send(embed=dm_msg)
 
-	
+@client.command(aliases = ["емодзи", "емоджи", "эмоджи", "эмоция"])
+async def эмодзи(ctx, emoji: discord.Emoji):
+    e = discord.Embed(description = f"[Эмодзи]({emoji.url}) сервера {emoji}")
+    e.add_field(name = "Имя:", value = f"`{emoji.name}`")
+    e.add_field(name = "Автор:", value = f"{(await ctx.guild.fetch_emoji(emoji.id)).user.mention}")
+    e.add_field(name = "‎‎‎‎", value = "‎‎‎‎")
+    e.add_field(name = "Время добавления:", value = f"`{emoji.created_at}`")
+    e.add_field(name = "ID эмодзи:", value = f"`{emoji.id}`")
+    e.add_field(name = "‎‎‎‎", value = "‎‎‎‎")
+    e.set_thumbnail(url = f"{emoji.url}")
+    await ctx.send(embed = e)
+
+    
 token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
 client.run(str(token)) # запускаем бота
