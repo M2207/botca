@@ -24,7 +24,7 @@ async def on_ready(*args):
 
 @client.event
 async def on_member_join( member ):
-    emb = discord.Embed( description = f"**<:dancing_lizard:752155282615828530> Пользователь **{member.mention}**, присоединился к серверу!<a:dancing_lizard:752155282615828530> **", color = 0x0c0c0c )
+    emb = discord.Embed( description = f"**<a:dancing_lizard:752155282615828530> Пользователь **{member.mention}**, присоединился к серверу!<a:dancing_lizard:752155282615828530> **", color = 0x0c0c0c )
     
 
     channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
