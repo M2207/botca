@@ -1,38 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@clown338 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-clown338
-/
-botca
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-botca/bot.py /
-@clown338
-clown338 Update bot.py
-Latest commit 2da1e42 yesterday
- History
- 1 contributor
-250 lines (180 sloc)  11.6 KB
-  
 import discord
 from discord.ext import commands
 import asyncio
