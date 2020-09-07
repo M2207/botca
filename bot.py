@@ -1,3 +1,5 @@
+
+  
 import discord
 from discord.ext import commands
 import asyncio
@@ -133,10 +135,7 @@ async def сказать(ctx, member: discord.Member = None, *, reason=None):
     await ctx.channel.purge( limit = 1 )
     emb = discord.Embed(description= f'**<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>{reason}<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>**', color=0x6fdb9e)
     await member.send(embed=emb)
-
-‎‎‎‎
-‎‎‎‎
-
+    
 @сказать.error 
 async def сказать(ctx, error):
 
