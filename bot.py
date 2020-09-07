@@ -136,12 +136,7 @@ async def сказать(ctx, member: discord.Member = None, *, reason=None):
     emb = discord.Embed(description= f'**<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>{reason}<a:pingin:730480224898252840><a:pingin:730480224898252840><a:pingin:730480224898252840>**', color=0x6fdb9e)
     await member.send(embed=emb)
     
-@сказать.error 
-async def сказать(ctx, error):
 
-    if isinstance( error, commands.MissingPermissions ):
-        await ctx.channel.purge( limit = 1 )
-        await ctx.send(embed = discord.Embed(description = f'**:exclamation: {ctx.author.mention},пасаси.**', color=0x0c0c0c))
 
 
 @client.command( pass_context = True, aliases=[ "av", "аватар", "ав" ] )
