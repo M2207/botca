@@ -29,6 +29,7 @@ async def on_member_join( member ):
 
     channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
     await channel.send( embed = emb )
+	  await channel.send(f"https://cdn.discordapp.com/attachments/751790701251133562/754683704575787098/1.gif")
 
 
 @client.event
