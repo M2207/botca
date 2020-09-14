@@ -35,11 +35,12 @@ async def on_member_join( member ):
 
 @client.event
 async def on_member_remove( member ):
-    emb = discord.Embed( description = f"**<:sad:752157651617579079> Пользователь **{member.mention}**, покинул сервер!<:sad:752157651617579079> **", color = 0x0c0c0c )
-    
-
-    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
-    await channel.send( embed = emb )
+	channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
+	e = discord.Embed(colour=0x08dfab)
+	e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
+	e.add_field(name = "**UNWELCOME**", value = f"**Пользователь, {member.mention} покинул наш сервер.\nПопутнага вiтру!**")
+	e.set_thumbnail(url = f"https://cdn.discordapp.com/attachments/644458478601240587/755072915631767623/625243a1983a8f22a3d10ba4d8fc410d-removebg-preview.png")
+	await channel.send(embed=e)
 
 
 @client.event
