@@ -24,12 +24,13 @@ async def on_ready(*args):
 
 @client.event
 async def on_member_join( member ):
-    emb = discord.Embed( description = f"**<a:dancing_lizard:752155282615828530> Пользователь **{member.mention}**, присоединился к серверу!<a:dancing_lizard:752155282615828530> **", color = 0x0c0c0c )
-    
-
-    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
-    await channel.send( embed = emb )
-    await channel.send(f"https://cdn.discordapp.com/attachments/751790701251133562/754683704575787098/1.gif")
+	channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
+	e = discord.Embed(colour=0x08dfab)
+	e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
+	e.add_field(name = "**WELCOME**", value = f"**Приветствуем тебя в нашем Крысином королевстве, {member.mention}\nСоветуем к прочтению <#751840902053363863>**")
+	e.set_thumbnail(url = f"https://media.discordapp.net/attachments/644458478601240587/755067305607561256/ds_o_o_ns_s_Instagram_photo-removebg-preview.png?width=468&height=468")
+	await channel.send(embed=e)
+	await channel.send("https://media.discordapp.net/attachments/644458478601240587/755141544905932880/image0.png")
 
 
 @client.event
