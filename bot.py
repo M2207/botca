@@ -284,7 +284,7 @@ async def сompatibility(ctx, member : discord.Member):
         embed=discord.Embed(title="Совместимость", description="Идёт подсчёт между пользователями", color=0xcd60aa)
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/755484420701552800/755485264151052365/jBEoRgekMHI-removebg-preview.png?width=463&height=475")
         embed.add_field(name="Результат:", value="Совместимость", inline=True)
-        await self.bot.say(embed=embed)
+        await ctx.send(embed=embed)
 @client.command()
 @commands.has_permissions( administrator = True)
 async def ban(ctx, member: discord.Member, *, reason = None):
