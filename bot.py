@@ -115,7 +115,7 @@ async def say(ctx, *, arg):
 
     await ctx.message.delete()
 
-    await ctx.send(embed = discord.Embed(description = f'{arg}', color=dea87a))
+    await ctx.send(embed = discord.Embed(description = f'{arg}', color=#dea87a))
 
 @client.command()
 @commands.has_permissions( administrator = True)
