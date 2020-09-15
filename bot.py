@@ -256,7 +256,8 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.add_field(name = "‎‎‎‎", value = "‎‎‎‎")
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
-@client.event()
+
+@client.event
 async def on_raw_reaction_add(payload):
     if payload.message_id == 755454018914091038: # ID Сообщения
         guild = client.get_guild(payload.guild_id)
