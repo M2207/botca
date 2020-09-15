@@ -67,7 +67,7 @@ async def on_raw_reaction_add(payload):
 
         if str(payload.emoji) == '<a:red:755090107509374996>': # Emoji для реакций
             role = guild.get_role(752166340923490464) # ID Ролей для выдачи 【v】【e】【r】【i】【f】【i】【e】【d】
-	  elif str(payload.emoji) == '<a:orang:755090261775876157>':
+	  elif str(payload.emoji) == '<a:orange:755090261775876157>':
             role = guild.get_role(752165807932309536)
 	  elif str(payload.emoji) == '<a:yellow:755090339957833728>':
             role = guild.get_role(752165918079189032)
@@ -94,7 +94,7 @@ async def on_raw_reaction_remove(payload):
 
        if str(payload.emoji) == '<a:red:755090107509374996>': # Emoji для реакций
             role = guild.get_role(752166340923490464) # ID Ролей для выдачи 【v】【e】【r】【i】【f】【i】【e】【d】
-	  elif str(payload.emoji) == '<a:orang:755090261775876157>':
+	  elif str(payload.emoji) == '<a:orange:755090261775876157>':
             role = guild.get_role(752165807932309536)
 	  elif str(payload.emoji) == '<a:yellow:755090339957833728>':
             role = guild.get_role(752165918079189032)
