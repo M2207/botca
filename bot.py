@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 import requests
-import random as r
+import random
 import sqlite3
 import os
 
