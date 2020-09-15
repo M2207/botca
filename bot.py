@@ -109,7 +109,13 @@ async def on_raw_reaction_remove(payload):
             member = guild.get_member(payload.user_id)
             if member:
                 await member.remove_roles(role)
+@client.command()
+@commands.has_permissions( administrator = True)
+async def say(ctx, *, arg):
 
+    await ctx.message.delete()
+
+    await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
 
 @client.command()
 @commands.has_permissions( administrator = True)
