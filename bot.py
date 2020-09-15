@@ -281,7 +281,7 @@ async def эмодзи(ctx, emoji: discord.Emoji):
             role = guild.get_role(752166248711979209)
 	
 
-        if role:
+         if role:
             member = guild.get_member(payload.user_id)
             if member:
                 await member.add_roles(role)
