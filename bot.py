@@ -59,7 +59,7 @@ async def on_message_delete(message):
     return
 @client.event
 async def on_raw_reaction_add(payload):
-    if payload.message_id == 755454813441097789: # ID Сообщения
+    if payload.message_id == 755472012587171952: # ID Сообщения
         guild = client.get_guild(payload.guild_id)
         role = None
 
@@ -85,7 +85,7 @@ async def on_raw_reaction_add(payload):
                 await member.add_roles(role)
 @client.event
 async def on_raw_reaction_remove(payload):
-    if payload.message_id == 755454018914091038: # ID Сообщения
+    if payload.message_id == 755472012587171952: # ID Сообщения
         guild = client.get_guild(payload.guild_id)
         role = None
 
@@ -115,7 +115,7 @@ async def say(ctx, *, arg):
 
     await ctx.message.delete()
 
-    await ctx.send(embed = discord.Embed(description = f'{arg}', color=0x0c0c0c))
+    await ctx.send(embed = discord.Embed(description = f'{arg}', color=dea87a))
 
 @client.command()
 @commands.has_permissions( administrator = True)
