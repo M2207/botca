@@ -1,5 +1,3 @@
-
-  
 import discord
 from discord.ext import commands
 import asyncio
@@ -24,24 +22,24 @@ async def on_ready(*args):
 
 @client.event
 async def on_member_join( member ):
-	channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
-	e = discord.Embed(colour=0xFEA0FD)
-	e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
-	e.add_field(name = "**WELCOME**", value = f"**Приветствуем тебя в нашем Крысином королевстве, {member.mention}\nСоветуем к прочтению <#751840902053363863>**")
-	e.set_thumbnail(url = f"https://media.discordapp.net/attachments/644458478601240587/755067305607561256/ds_o_o_ns_s_Instagram_photo-removebg-preview.png?width=468&height=468")
-	await channel.send(embed=e)
-	await channel.send("https://media.discordapp.net/attachments/644458478601240587/755141544905932880/image0.png")
+    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
+    e = discord.Embed(colour=0xFEA0FD)
+    e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
+    e.add_field(name = "**WELCOME**", value = f"**Приветствуем тебя в нашем Крысином королевстве, {member.mention}\nСоветуем к прочтению <#751840902053363863>**")
+    e.set_thumbnail(url = f"https://media.discordapp.net/attachments/644458478601240587/755067305607561256/ds_o_o_ns_s_Instagram_photo-removebg-preview.png?width=468&height=468")
+    await channel.send(embed=e)
+    await channel.send("https://media.discordapp.net/attachments/644458478601240587/755141544905932880/image0.png")
 
 
 @client.event
 async def on_member_remove( member ):
-	channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
-	e = discord.Embed(colour=0x7e9fef)
-	e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
-	e.add_field(name = "**UNWELCOME**", value = f"**Пользователь, {member.mention} покинул наш сервер.\nПопутнага вiтру!**")
-	e.set_thumbnail(url = f"https://cdn.discordapp.com/attachments/644458478601240587/755072915631767623/625243a1983a8f22a3d10ba4d8fc410d-removebg-preview.png")
-	await channel.send(embed=e)
-	await channel.send("https://media.discordapp.net/attachments/644458478601240587/755145178217709628/image0.png")
+    channel = client.get_channel( 751789588363870239 ) # Айди канала куда будет писаться сообщение
+    e = discord.Embed(colour=0x7e9fef)
+    e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
+    e.add_field(name = "**UNWELCOME**", value = f"**Пользователь, {member.mention} покинул наш сервер.\nПопутнага вiтру!**")
+    e.set_thumbnail(url = f"https://cdn.discordapp.com/attachments/644458478601240587/755072915631767623/625243a1983a8f22a3d10ba4d8fc410d-removebg-preview.png")
+    await channel.send(embed=e)
+    await channel.send("https://media.discordapp.net/attachments/644458478601240587/755145178217709628/image0.png")
 
 
 @client.event
@@ -67,21 +65,21 @@ async def on_raw_reaction_add(payload):
 
         if str(payload.emoji) == '<a:red:755090107509374996>': # Emoji для реакций
             role = guild.get_role(752166340923490464) # ID Ролей для выдачи 【v】【e】【r】【i】【f】【i】【e】【d】
-	  elif str(payload.emoji) == '<a:orange:755090261775876157>':
+        elif str(payload.emoji) == '<a:orange:755090261775876157>':
             role = guild.get_role(752165807932309536)
-	  elif str(payload.emoji) == '<a:yellow:755090339957833728>':
+        elif str(payload.emoji) == '<a:yellow:755090339957833728>':
             role = guild.get_role(752165918079189032)
-	  elif str(payload.emoji) == '<a:green:755090396127821958>':
+        elif str(payload.emoji) == '<a:green:755090396127821958>':
             role = guild.get_role(752166038136946719)
-	  elif str(payload.emoji) == '<a:lightblue:755090481477845082>':
+        elif str(payload.emoji) == '<a:lightblue:755090481477845082>':
             role = guild.get_role(752166131040518169)
-	  elif str(payload.emoji) == '<a:blue:755090687124308028>':
+        elif str(payload.emoji) == '<a:blue:755090687124308028>':
             role = guild.get_role(752166248711979209)
-	elif str(payload.emoji) == '<a:purple:755090761510289619>':
+        elif str(payload.emoji) == '<a:purple:755090761510289619>':
             role = guild.get_role(752166340923490464)
-	
+    
 
-         if role:
+        if role:
             member = guild.get_member(payload.user_id)
             if member:
                 await member.add_roles(role)
@@ -92,19 +90,19 @@ async def on_raw_reaction_remove(payload):
         role = None
 
 
-       if str(payload.emoji) == '<a:red:755090107509374996>': # Emoji для реакций
+        if str(payload.emoji) == '<a:red:755090107509374996>': # Emoji для реакций
             role = guild.get_role(752166340923490464) # ID Ролей для выдачи 【v】【e】【r】【i】【f】【i】【e】【d】
-	  elif str(payload.emoji) == '<a:orange:755090261775876157>':
+        elif str(payload.emoji) == '<a:orange:755090261775876157>':
             role = guild.get_role(752165807932309536)
-	  elif str(payload.emoji) == '<a:yellow:755090339957833728>':
+        elif str(payload.emoji) == '<a:yellow:755090339957833728>':
             role = guild.get_role(752165918079189032)
-	  elif str(payload.emoji) == '<a:green:755090396127821958>':
+        elif str(payload.emoji) == '<a:green:755090396127821958>':
             role = guild.get_role(752166038136946719)
-	  elif str(payload.emoji) == '<a:lightblue:755090481477845082>':
+        elif str(payload.emoji) == '<a:lightblue:755090481477845082>':
             role = guild.get_role(752166131040518169)
-	  elif str(payload.emoji) == '<a:blue:755090687124308028>':
+        elif str(payload.emoji) == '<a:blue:755090687124308028>':
             role = guild.get_role(752166248711979209)
-	elif str(payload.emoji) == '<a:purple:755090761510289619>':
+        elif str(payload.emoji) == '<a:purple:755090761510289619>':
             role = guild.get_role(752166340923490464)
 
         if role:
