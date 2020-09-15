@@ -260,8 +260,8 @@ async def эмодзи(ctx, emoji: discord.Emoji):
 
 
 @client.event
- async def on_raw_reaction_remove(payload):
-    if payload.message_id == 755454018914091038: # ID Сообщения
+async def on_raw_reaction_add(payload):
+    if payload.message_id == 755454813441097789: # ID Сообщения
         guild = client.get_guild(payload.guild_id)
         role = None
 
