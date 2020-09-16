@@ -317,10 +317,10 @@ async def эмодзи(ctx, emoji: discord.Emoji):
 
 @client.event
 async def on_message( message ):
+    await client.process_commands( message )
     msg = message.content.lower()
     if msg in ok:
      await ctx.send( "Хуек ") 
-
 
     
 token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
