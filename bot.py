@@ -241,24 +241,6 @@ async def __voice_error(ctx, error):
     if isinstance( error, commands.MissingRequiredArgument ):
         await ctx.send(embed = discord.Embed(description = f'**:exclamation: {ctx.author.name},укажите пользователя или время**', color=0x0c0c0c))
 
-@client.command()
-@commands.has_permissions(administrator=True)
-async def mute(ctx, member: discord.Member,reason=None):
-        try:#Даю роль mute
-            mute_role = discord.utils.get(member.guild.roles,name='mute')
-            await member.add_roles(mute_role)
-        except: # Если такой нет то саздаю и сразу настраиваю
-            role = await ctx.guild.create_role(name="mute")#создаю роль с названием mute
-            #меняю права роли
-            await role.edit(name='mute', send_messages=False, send_tts_messages=False, read_messages=True, hoist=True)
-            mute_role = discord.utils.get(member.guild.roles,name='mute')
-            await member.add_roles(mute_role)#Даю роль 
-            #Настраиваю каналыы
-            overwrite = discord.PermissionOverwrite()
-            overwrite.send_messages = False
-            for chat in ctx.guild.channels:
-                await chat.set_permissions(role, overwrite=overwrite)
-
 
 
 
