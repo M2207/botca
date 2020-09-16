@@ -17,23 +17,6 @@ async def on_ready(*args):
     status = discord.Status.dnd
     await client.change_presence(activity = activity, status = status)
     
-@client.command()
-@commands.has_permissions(administrator=True)
-async def mutes(ctx, member: discord.Member,reason=None):
-        try:#Даю роль mute
-            mute_role = discord.utils.get(member.guild.roles,name='mute')
-            await member.add_roles(mute_role)
-        except: # Если такой нет то саздаю и сразу настраиваю
-            role = await ctx.guild.create_role(name="mute")#создаю роль с названием mute
-            #меняю права роли
-            await role.edit(name='mute', send_messages=False, send_tts_messages=False, read_messages=True, hoist=True)
-            mute_role = discord.utils.get(member.guild.roles,name='mute')
-            await member.add_roles(mute_role)#Даю роль 
-            #Настраиваю каналыы
-            overwrite = discord.PermissionOverwrite()
-            overwrite.send_messages = False
-            for chat in ctx.guild.channels:
-                await chat.set_permissions(role, overwrite=overwrite)
 
 
 
@@ -146,7 +129,7 @@ async def tempmute(ctx, member : discord.Member, time:int, arg:str, *, reason=No
 
     Переменная_размут = f'**Вы были размучены на сервере {ctx.guild.name}**'
     Переменная_мут = f'**Вы были замучены на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-    mute_role = discord.utils.get( ctx.message.guild.roles, id = 755887208107475065 )
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 755895110662619256 )
 
     await member.add_roles(mute_role, reason=None, atomic=True)
     await ctx.send(embed = discord.Embed(description = f'**:shield:Мут пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
@@ -188,7 +171,7 @@ async def unmute(ctx,member: discord.Member = None):
 
     else:
 
-        mute_role = discord.utils.get(member.guild.roles, id = 755887208107475065) #Айди роли
+        mute_role = discord.utils.get(member.guild.roles, id = 755895110662619256) #Айди роли
 
     await member.remove_roles( mute_role )
     await ctx.send(embed = discord.Embed(description = f'**:shield: Пользователю {member.mention} был вернут доступ к чатам.**', color=0x0c0c0c))    
