@@ -112,10 +112,8 @@ async def on_raw_reaction_remove(payload):
             if member:
                 await member.remove_roles(role)
 @client.event
-async def on_message( message ):
-    await client.process_commands( message )
-    msg = message.content.lower()
-    if msg in word_1:
+async def on_message( msg ):
+   if msg.content == " Ок ":
      await ctx.send(' Хуек ') 
 
 
