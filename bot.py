@@ -8,7 +8,7 @@ import os
 
 
 client = commands.Bot(command_prefix='/')
-
+ok = ["Ок ", "ок" ,"Ok" , "ok"]
 
 @client.event
 async def on_ready(*args):
@@ -314,12 +314,12 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.add_field(name = "‎‎‎‎", value = "‎‎‎‎")
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
+
 @client.event
 async def on_message( message ):
     msg = message.content.lower()
-    if msg == "ок":
+    if msg in ok:
      await ctx.send( "Хуек ") 
-
 
 
     
