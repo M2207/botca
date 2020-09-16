@@ -6,7 +6,6 @@ import random
 import sqlite3
 import os
 
-
 PREFIX = '/'
 
 client = commands.Bot( command_prefix=PREFIX )
