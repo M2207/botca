@@ -6,9 +6,7 @@ import random
 import sqlite3
 import os
 
-
 client = commands.Bot(command_prefix='/')
-word_1 = [' Ок ', 'ок' ,' Ok ' , ' ok ']
 
 @client.event
 async def on_ready(*args):
