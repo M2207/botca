@@ -127,7 +127,7 @@ async def tempmute(ctx, member : discord.Member, time:int, arg:str, *, reason=No
 
     Переменная_размут = f'**Вы были размучены на сервере {ctx.guild.name}**'
     Переменная_мут = f'**Вы были замучены на сервере {ctx.guild.name} на {time}{arg} по причине: {reason}**'
-    mute_role = discord.utils.get( ctx.message.guild.roles, id = 755885690696237067 )
+    mute_role = discord.utils.get( ctx.message.guild.roles, id = 755887208107475065 )
 
     await member.add_roles(mute_role, reason=None, atomic=True)
     await ctx.send(embed = discord.Embed(description = f'**:shield:Мут пользователю {member.mention} успешно выдан на {time}{arg} по причине {reason} :shield:**', color=0x0000FF))
