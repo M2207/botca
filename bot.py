@@ -111,6 +111,12 @@ async def on_raw_reaction_remove(payload):
             member = guild.get_member(payload.user_id)
             if member:
                 await member.remove_roles(role)
+@client.event
+async def on_message( message ):
+    await client.process_commands( message )
+    msg = message.content.lower()
+    if msg in ok:
+     await ctx.send( "Хуек ") 
 
 
 @client.command()
@@ -315,12 +321,7 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
 
-@client.event
-async def on_message( message ):
-    await client.process_commands( message )
-    msg = message.content.lower()
-    if msg in ok:
-     await ctx.send( "Хуек ") 
+
 
     
 token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
