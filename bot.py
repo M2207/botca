@@ -328,7 +328,24 @@ async def inf(ctx):
     embed.add_field(name="Навигация по серверу", value="", inline=False)
     embed.add_field(name="1", value="<#755455778323693678> - Список общедоступных команд.", inline=True)
     await ctx.send(embed=embed)
-
+    
+@client.command()
+@commands.has_permissions(administrator=True)
+async def mute(ctx, member: discord.Member,reason=None):
+        try:#Даю роль mute
+            mute_role = discord.utils.get(member.guild.roles,name='mute')
+            await member.add_roles(mute_role)
+        except: # Если такой нет то саздаю и сразу настраиваю
+            role = await ctx.guild.create_role(name="mute")#создаю роль с названием mute
+            #меняю права роли
+            await role.edit(name='mute', send_messages=False, send_tts_messages=False, read_messages=True, hoist=True)
+            mute_role = discord.utils.get(member.guild.roles,name='mute')
+            await member.add_roles(mute_role)#Даю роль 
+            #Настраиваю каналыы
+            overwrite = discord.PermissionOverwrite()
+            overwrite.send_messages = False
+            for chat in ctx.guild.channels:
+                await chat.set_permissions(role, overwrite=overwrite)
 
 
     
