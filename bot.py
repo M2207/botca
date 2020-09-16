@@ -38,8 +38,8 @@ async def on_member_remove( member ):
     e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
     e.add_field(name = "**UNWELCOME**", value = f"**Пользователь, {member.mention} покинул наш сервер.\nПопутнага вiтру!**")
     e.set_thumbnail(url = f"https://cdn.discordapp.com/attachments/644458478601240587/755072915631767623/625243a1983a8f22a3d10ba4d8fc410d-removebg-preview.png")
+    e.set_image(url='https://media.discordapp.net/attachments/644458478601240587/755145178217709628/image0.png')
     await channel.send(embed=e)
-    await channel.send("https://media.discordapp.net/attachments/644458478601240587/755145178217709628/image0.png")
 
 
 @client.event
