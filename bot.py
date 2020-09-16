@@ -8,7 +8,7 @@ import os
 
 
 client = commands.Bot(command_prefix='/')
-ok = ["Ок ", "ок" ,"Ok" , "ok"]
+word_1 = [' Ок ', 'ок' ,' Ok ' , ' ok ']
 
 @client.event
 async def on_ready(*args):
@@ -115,8 +115,8 @@ async def on_raw_reaction_remove(payload):
 async def on_message( message ):
     await client.process_commands( message )
     msg = message.content.lower()
-    if msg in ok:
-     await ctx.send( "Хуек ") 
+    if msg in word_1:
+     await ctx.send(' Хуек ') 
 
 
 @client.command()
