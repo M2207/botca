@@ -326,7 +326,7 @@ async def inf(ctx):
     embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/P_9h7K3FqmXvMG0x0DU0p15w9y-vkNt8RxBUg_bepG0/%3Fwidth%3D447%26height%3D447/https/media.discordapp.net/attachments/755058882870771793/755497460331315260/unknown.png")
     embed.add_field(name="Крысиное королевство - сервер, в котором ты сможешь найти что-нибудь для себя", value="", inline=False)
     embed.add_field(name="Навигация по серверу", value="", inline=False)
-    embed.add_field(name="", value="<#755455778323693678> - Список общедоступных команд.", inline=True)
+    embed.add_field(name="1", value="<#755455778323693678> - Список общедоступных команд.", inline=True)
     await ctx.send(embed=embed)
 
 
