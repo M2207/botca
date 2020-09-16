@@ -40,7 +40,10 @@ async def on_member_remove( member ):
     e.set_thumbnail(url = f"https://cdn.discordapp.com/attachments/644458478601240587/755072915631767623/625243a1983a8f22a3d10ba4d8fc410d-removebg-preview.png")
     e.set_image(url='https://media.discordapp.net/attachments/644458478601240587/755145178217709628/image0.png')
     await channel.send(embed=e)
-
+@client.event
+async def on_message(ctx,msg):
+    if msg.content == "Ок";
+     await ctx.send("Хуек")
 
 @client.event
 async def on_message_delete(message):
