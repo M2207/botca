@@ -314,7 +314,11 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.add_field(name = "‎‎‎‎", value = "‎‎‎‎")
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
-
+@client.event
+async def on_message( message ):
+    msg = message.content.lower()
+    if msg == "ок":
+     await ctx.send( "Хуек ") 
 
 
 
