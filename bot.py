@@ -169,7 +169,7 @@ async def unmute(ctx,member: discord.Member = None):
 
     else:
 
-        mute_role = discord.utils.get(member.guild.roles, id = 752531904292585575) #Айди роли
+        mute_role = discord.utils.get(member.guild.roles, id = 755887208107475065) #Айди роли
 
     await member.remove_roles( mute_role )
     await ctx.send(embed = discord.Embed(description = f'**:shield: Пользователю {member.mention} был вернут доступ к чатам.**', color=0x0c0c0c))    
