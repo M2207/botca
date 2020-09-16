@@ -19,7 +19,7 @@ async def on_ready(*args):
     
 @client.command()
 @commands.has_permissions(administrator=True)
-async def mute(ctx, member: discord.Member,reason=None):
+async def mutes(ctx, member: discord.Member,reason=None):
         try:#Даю роль mute
             mute_role = discord.utils.get(member.guild.roles,name='mute')
             await member.add_roles(mute_role)
@@ -295,6 +295,7 @@ async def serverinfo(ctx):
     embed.set_footer(text=f"ID: {ctx.guild.id}")
     embed.set_footer(text=f"ID Пользователя: {ctx.author.id}")
     await ctx.send(embed=embed)
+
 @client.command(aliases = ["совместимость"])
 async def сompatibility(ctx, member : discord.Member):
 
