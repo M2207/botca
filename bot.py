@@ -27,8 +27,8 @@ async def on_member_join( member ):
     e.set_author(icon_url = member.avatar_url, name = f'{member.display_name}',)
     e.add_field(name = "**WELCOME**", value = f"**Приветствуем тебя в нашем Крысином королевстве, {member.mention}\nСоветуем к прочтению <#751840902053363863>**")
     e.set_thumbnail(url = f"https://media.discordapp.net/attachments/644458478601240587/755067305607561256/ds_o_o_ns_s_Instagram_photo-removebg-preview.png?width=468&height=468")
+    e.set_image(url='https://media.discordapp.net/attachments/644458478601240587/755141544905932880/image0.png')
     await channel.send(embed=e)
-    await channel.send("https://media.discordapp.net/attachments/644458478601240587/755141544905932880/image0.png")
 
 
 @client.event
