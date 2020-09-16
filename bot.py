@@ -55,7 +55,10 @@ async def on_message_delete(message):
     emb.set_footer(text=f'ID Пользователя: {message.author.id} | ID Сообщения: {message.id}')
     await channel.send(embed=emb)
     return
-
+@client.event
+async def on_message(ctx,msg ):
+   if msg.content == " Ок ":
+     await ctx.send(' Хуек ') 
                                          
 @client.event
 async def on_raw_reaction_add(payload):
