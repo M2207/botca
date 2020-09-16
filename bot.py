@@ -6,8 +6,10 @@ import random
 import sqlite3
 import os
 
-client = commands.Bot(command_prefix='/')
 
+PREFIX = '/'
+
+client = commands.Bot( command_prefix=PREFIX )
 @client.event
 async def on_ready(*args):
     print ( 'Бот Подключён!Можно работать.' )
