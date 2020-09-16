@@ -111,10 +111,7 @@ async def on_raw_reaction_remove(payload):
             member = guild.get_member(payload.user_id)
             if member:
                 await member.remove_roles(role)
-@client.event
-async def on_message(ctx,msg ):
-   if msg.content == " Ок ":
-     await ctx.send(' Хуек ') 
+
 
 
 @client.command()
