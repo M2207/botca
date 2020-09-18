@@ -289,7 +289,7 @@ async def сompatibility(ctx, member : discord.Member):
         await ctx.send(embed=embed) 
 
 
-@commands.command(pass_context = True)
+@client.command(pass_context = True)
 @commands.has_permissions(ban_members = True)
 async def ban(ctx, member: discord.Member, amount: int, *, reason = None):
     channel_log = client.get_channel(720694058300735640)
