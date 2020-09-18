@@ -288,22 +288,138 @@ async def сompatibility(ctx, member : discord.Member):
         embed.add_field(name="Результат:", value=f"Совместимость {ctx.author.mention} и {member.mention},** равна {random.choice(list)}  % :rat: ** ", inline=True)
         await ctx.send(embed=embed) 
 
-@client.command()
-@commands.has_permissions( administrator = True)
-async def ban(ctx, member: discord.Member, *, reason = None):
-    if member.id == ctx.author.id:
-        return await ctx.send("ты даун?")
+
+@commands.command(pass_context = True)
+@commands.has_permissions(ban_members = True)
+async def ban(ctx, member: discord.Member, amount: int, *, reason = None):
+    channel_log = client.get_channel(720694058300735640)
+    emb = discord.Embed(title = 'Бан', colour = discord.Color.red())
+    await ctx.message.delete()
+    if not member:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Правильное использование команды: `ban @пользователь 10 (дней) причина`', color=0x800080))
     if member.id == ctx.guild.owner.id:
-        return await ctx.send("Я не буду банить создателя сервера...")
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Данный пользователь, {member.mention}, является создателем этого сервера!**', color=0x800080))
+    if member.id == ctx.guild.me.id:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу забанить самого себя!**', color=0x800080))
     if ctx.author.top_role.position < member.top_role.position:
-        return await ctx.send("Я не буду банить человека который выше тебя по должности!")
-    guild_msg=discord.Embed(description=f"{ctx.author.mention} забанил участника {member.mention} по причине: {reason}")
-    dm_msg=discord.Embed(description=f"Вы были забанены на сервере {ctx.guild.name}, модератором {ctx.author.mention}, по причине: {reason}")
-    if reason is None:
-        reason="Не указана"
-    await member.ban(member, reason=reason)
-    await ctx.send(embed=guild_msg)
-    await member.send(embed=dm_msg)
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Эм... Это троллинг? Ты не можешь забанить человека с позицией выше твоей!**', color=0x800080))
+    if member.id == ctx.author.id:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Напомню, суицид - это не выход!**', color=0x800080))
+    if member.top_role > ctx.guild.me.top_role:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу забанить {member.mention}, так как его роль выше моей!**', color=0x800080))
+    now_date = datetime.datetime.now()
+    emb.set_author(name = member.name, icon_url = member.avatar_url)
+    emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
+    emb.add_field(name = '__***Тип наказания:***__', value = 'ban', inline = False)
+    emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
+    if amount == -1:
+        emb.add_field(name = '__***Выдано на:***__', value = 'навсегда', inline = False)
+        if reason is None:
+            emb.add_field(name = '__***Причина:***__', value = 'Не указана.', inline = False)
+        else:
+            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
+        emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+        await channel_log.send(embed = emb)
+        await member.send(embed = emb)
+        if reason is None:
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был забанен навсегда.\nПричина: Не указана.```')
+            enter_reason = ctx.author.display_name + " - Не указана."
+            await ctx.guild.ban(member, reason = enter_reason)
+        else:
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был забанен навсегда.\nПричина: {reason}```')
+            enter_reason = ctx.author.display_name + " - " + reason
+            await ctx.guild.ban(member, reason = enter_reason)
+        #await member.ban(reason = reason)
+        #await ctx.guild.unban(member)
+    else:
+        emb.add_field(name = '__***Выдано на:***__', value = '{} дней'.format(amount), inline = False)
+        if reason is None:
+            emb.add_field(name = '__***Причина:***__', value = 'Не указана.', inline = False)
+            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+            await channel_log.send(embed = emb)
+            await member.send(embed = emb)
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был забанен на {amount} дней.\nПричина: Не указана.```')
+            enter_reason = ctx.author.display_name + " - Не указана."
+            await ctx.guild.ban(member, reason = enter_reason)
+        else:
+            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
+            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+            await channel_log.send(embed = emb)
+            await member.send(embed = emb)
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был забанен {amount} дней.\nПричина: {reason}```')
+            enter_reason = ctx.author.display_name + " - " + reason
+            await ctx.guild.ban(member, reason = enter_reason)
+        #await member.ban(reason = reason)
+        await asyncio.sleep(amount * 86400) 
+        await member.unban()
+        #await ctx.guild.unban(member)
+ 
+@commands.command(pass_context = True)
+@commands.has_permissions(manage_messages = True)
+async def unmute(self, ctx, member: discord.Member, arg, *, reason = None):
+    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'Muted')
+    voice_role = discord.utils.get(ctx.message.guild.roles, name = 'Voice-Muted')
+    if not member and not arg:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Правильное использование команды: `unmute @пользователь TEXT/VOICE причина`', color=0x800080))
+    if member.top_role > ctx.guild.me.top_role:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу размутить {member.mention}, так как его роль выше моей!**', color=0x800080))
+    if mute_role.position > ctx.guild.me.top_role.position:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу размутить {member.mention}, так как роль мута выше моей!**', color=0x800080))
+    channel_log = self.bot.get_channel(720694058300735640)
+    now_date = datetime.datetime.now()
+    emb = discord.Embed(title = 'Размут', colour = discord.Color.green())
+    await ctx.message.delete()
+    if arg == 'TEXT':
+        if mute_role in member.roles:
+            await member.remove_roles(mute_role)
+            emb.set_author(name = member.name, icon_url = member.avatar_url)
+            emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
+            emb.add_field(name = '__***Тип наказания:***__', value = 'text_unmute', inline = False)
+            emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
+            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
+            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+            await channel_log.send(embed = emb)
+            await member.send(embed = emb)
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был размучен.\nПричина: {reason}```')
+        else:
+            return await ctx.send(embed = discord.Embed(description = f'**:warning: Данный пользователь, {member.mention}, не замучен!**', color=0x800080))
+    elif arg == 'VOICE':
+        if voice_role in member.roles:
+            await member.remove_roles(mute_role)
+            emb.set_author(name = member.name, icon_url = member.avatar_url)
+            emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
+            emb.add_field(name = '__***Тип наказания:***__', value = 'voice_unmute', inline = False)
+            emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
+            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
+            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+            await channel_log.send(embed = emb)
+            await member.send(embed = emb)
+            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был размучен в голосовом канале.\nПричина: {reason}```')
+    else:
+        await ctx.send(f'```NoBot » Вы не указали где размутить пользователя: в текстовом или голосовом канале.```')
+ 
+@commands.command(pass_context = True)
+@commands.has_permissions(ban_members = True)
+async def unban(ctx, member, *, reason = None):
+    channel_log = client.get_channel(720694058300735640)
+    if not member:
+        return await ctx.send(embed = discord.Embed(description = f'**:warning: Правильное использование команды: `unban @пользователь причина`', color=0x800080))
+    now_date = datetime.datetime.now()
+    emb = discord.Embed(title = 'Разбан', colour = discord.Color.green())
+    await ctx.message.delete()
+    banned_users = await ctx.guild.bans()
+    for ban_entry in banned_users:
+        user = ban_entry.user
+        await ctx.guild.unban(user)
+        emb.set_author(name = member.name, icon_url = member.avatar_url)
+        emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
+        emb.add_field(name = '__***Тип наказания:***__', value = 'unban', inline = False)
+        emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
+        emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
+        emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
+        await channel_log.send(embed = emb)
+        await member.send(embed = emb)
+        await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был разбанен.\nПричина: {reason}```')
 
 @client.command(aliases = ["емодзи", "емоджи", "эмоджи", "эмоция"])
 async def эмодзи(ctx, emoji: discord.Emoji):
