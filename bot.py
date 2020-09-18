@@ -354,49 +354,6 @@ async def ban(ctx, member: discord.Member, amount: int, *, reason = None):
         await member.unban()
         #await ctx.guild.unban(member)
  
-@commands.command(pass_context = True)
-@commands.has_permissions(manage_messages = True)
-async def unmute(self, ctx, member: discord.Member, arg, *, reason = None):
-    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'Muted')
-    voice_role = discord.utils.get(ctx.message.guild.roles, name = 'Voice-Muted')
-    if not member and not arg:
-        return await ctx.send(embed = discord.Embed(description = f'**:warning: Правильное использование команды: `unmute @пользователь TEXT/VOICE причина`', color=0x800080))
-    if member.top_role > ctx.guild.me.top_role:
-        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу размутить {member.mention}, так как его роль выше моей!**', color=0x800080))
-    if mute_role.position > ctx.guild.me.top_role.position:
-        return await ctx.send(embed = discord.Embed(description = f'**:warning: Я не могу размутить {member.mention}, так как роль мута выше моей!**', color=0x800080))
-    channel_log = self.bot.get_channel(720694058300735640)
-    now_date = datetime.datetime.now()
-    emb = discord.Embed(title = 'Размут', colour = discord.Color.green())
-    await ctx.message.delete()
-    if arg == 'TEXT':
-        if mute_role in member.roles:
-            await member.remove_roles(mute_role)
-            emb.set_author(name = member.name, icon_url = member.avatar_url)
-            emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
-            emb.add_field(name = '__***Тип наказания:***__', value = 'text_unmute', inline = False)
-            emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
-            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
-            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
-            await channel_log.send(embed = emb)
-            await member.send(embed = emb)
-            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был размучен.\nПричина: {reason}```')
-        else:
-            return await ctx.send(embed = discord.Embed(description = f'**:warning: Данный пользователь, {member.mention}, не замучен!**', color=0x800080))
-    elif arg == 'VOICE':
-        if voice_role in member.roles:
-            await member.remove_roles(mute_role)
-            emb.set_author(name = member.name, icon_url = member.avatar_url)
-            emb.add_field(name = '__***Выдал:***__', value = '{}'.format(ctx.author.display_name), inline = False)
-            emb.add_field(name = '__***Тип наказания:***__', value = 'voice_unmute', inline = False)
-            emb.add_field(name = '__***Время выдачи:***__', value = '{}'.format(now_date), inline = False)
-            emb.add_field(name = '__***Причина:***__', value = '{}'.format(reason), inline = False)
-            emb.set_footer(text = 'Не отвечайте на это сообщение.', icon_url = ctx.author.avatar_url)
-            await channel_log.send(embed = emb)
-            await member.send(embed = emb)
-            await ctx.send(f'```NoBot » Пользователь "{member.display_name}" был размучен в голосовом канале.\nПричина: {reason}```')
-    else:
-        await ctx.send(f'```NoBot » Вы не указали где размутить пользователя: в текстовом или голосовом канале.```')
  
 @commands.command(pass_context = True)
 @commands.has_permissions(ban_members = True)
