@@ -284,7 +284,7 @@ async def serverinfo(ctx):
 @client.command(aliases = ["совместимость"])
 async def сompatibility(ctx, member : discord.Member):
 
-        list = [,100]
+        list = [99,100]
         embed=discord.Embed(title="Совместимость :" ,description="**Идёт подсчёт между пользователями**", color=0xcd60aa)
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/755484420701552800/755485264151052365/jBEoRgekMHI-removebg-preview.png?width=463&height=475")
         embed.add_field(name="Результат:", value=f"Совместимость {ctx.author.mention} и {member.mention},** равна {random.choice(list)}  % :rat: ** ", inline=True)
