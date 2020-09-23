@@ -399,13 +399,25 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     
     
 @client.command()
-async def inf(ctx):  
-    embed=discord.Embed(title="Крысиное королевство", description="**Информация**", color=0x6590d1)
-    embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/P_9h7K3FqmXvMG0x0DU0p15w9y-vkNt8RxBUg_bepG0/%3Fwidth%3D447%26height%3D447/https/media.discordapp.net/attachments/755058882870771793/755497460331315260/unknown.png")
-    embed.add_field(name="Крысиное королевство - сервер, в котором ты сможешь найти что-нибудь для себя", value="", inline=False)
-    embed.add_field(name="Навигация по серверу", value="", inline=False)
-    embed.add_field(name="1", value="<#755455778323693678> - Список общедоступных команд.", inline=True)
-    await ctx.send(embed=embed)
+@commands.has_permissions(administrator = True)
+
+async def help(ctx):
+
+    emb = discord.Embed( title = 'Навигация по командам', color = discord.Colour.green() )
+
+    emb.add_field(name='{}clear'.format(PREFIX), value = 'Очистка чата')
+    emb.add_field(name='{}mute'.format(PREFIX), value = 'Временная блокировка чата')
+    emb.add_field(name='{}ban'.format(PREFIX), value = 'Ограничение доступа к серверу учасника')
+    emb.add_field(name='{}unban'.format(PREFIX), value = 'Открыть доступ к серверу учаснику который имел ограничение')
+    emb.add_field(name='{}avatar'.format(PREFIX), value = 'Аватар пользователя')
+    emb.add_field(name='{}ник'.format(PREFIX), value = 'Меняет ник пользователя')
+    emb.add_field(name='{}эмодзи'.format(PREFIX), value = 'Показывает информацию про эмодзи')
+   emb.add_field(name='{}'.format(PREFIX), value = '')
+    emb.add_field(name='{}'.format(PREFIX), value = '')
+
+    await ctx.send(embed = emb)
+
+    await ctx.message.delete(limit = 1)
     
 
 
