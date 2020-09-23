@@ -408,7 +408,7 @@ async def ник(ctx, member: discord.Member = None, *, nickname: str = None):
 
 @client.command()
 @commands.has_permissions(administrator = True)
-async def inf(ctx):
+async def help(ctx):
 
     emb = discord.Embed( title = 'Навигация по командам', color = discord.Colour.green() )
 
