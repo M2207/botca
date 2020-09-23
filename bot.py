@@ -408,6 +408,22 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
     
+    
+@client. command(name = "ник", aliases = ["rename", "change"])
+@commands.has_permissions(administrator = True)
+async def ник(ctx, member: discord.Member = None, *, nickname: str = None):
+    try:
+        if member is None:
+            await ctx.send(embed = discord.Embed(description = "Обязательно укажите **пользователя**!"))
+        elif nickname is None:
+            await ctx.send(embed = discord.Embed(description = "Обязательно укажите ник!"))
+        else:
+            await member.edit(nick = nickname)
+            await ctx.send(embed = discord.Embed(description = f"У пользователя **{member.name}** был изменен ник на **{nickname}**"))
+    except:
+        await ctx.send(embed = discord.Embed(description = f"Я не могу изменить ник пользователя **{member.name}**!"))
+
+
 @client.command()
 @commands.has_permissions(administrator = True)
 async def inf(ctx):
@@ -426,22 +442,6 @@ async def inf(ctx):
     await ctx.send(embed = emb)
 
     await ctx.message.delete(limit = 1)    
-    
-@client. command(name = "ник", aliases = ["rename", "change"])
-@commands.has_permissions(administrator = True)
-async def ник(ctx, member: discord.Member = None, *, nickname: str = None):
-    try:
-        if member is None:
-            await ctx.send(embed = discord.Embed(description = "Обязательно укажите **пользователя**!"))
-        elif nickname is None:
-            await ctx.send(embed = discord.Embed(description = "Обязательно укажите ник!"))
-        else:
-            await member.edit(nick = nickname)
-            await ctx.send(embed = discord.Embed(description = f"У пользователя **{member.name}** был изменен ник на **{nickname}**"))
-    except:
-        await ctx.send(embed = discord.Embed(description = f"Я не могу изменить ник пользователя **{member.name}**!"))
-
-
 
 
     
