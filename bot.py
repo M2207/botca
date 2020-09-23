@@ -408,15 +408,25 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     e.set_thumbnail(url = f"{emoji.url}")
     await ctx.send(embed = e)
     
-    
-    
-    
-    
-    
-    
-    
+@client.command()
+@commands.has_permissions(administrator = True)
+async def inf(ctx):
 
+    emb = discord.Embed( title = 'Навигация по командам', color = discord.Colour.green() )
 
+    emb.add_field(name='{}clear'.format(PREFIX), value = 'Очистка чата')
+    emb.add_field(name='{}mute'.format(PREFIX), value = 'Временная блокировка чата')
+    emb.add_field(name='{}ban'.format(PREFIX), value = 'Ограничение доступа к серверу учасника')
+    emb.add_field(name='{}unban'.format(PREFIX), value = 'Открыть доступ к серверу учаснику который имел ограничение')
+    emb.add_field(name='{}avatar'.format(PREFIX), value = 'Аватар пользователя')
+    emb.add_field(name='{}ник'.format(PREFIX), value = 'Меняет ник пользователя')
+    emb.add_field(name='{}эмодзи'.format(PREFIX), value = 'Показывает информацию про эмодзи')
+  
+
+    await ctx.send(embed = emb)
+
+    await ctx.message.delete(limit = 1)    
+    
 @client. command(name = "ник", aliases = ["rename", "change"])
 @commands.has_permissions(administrator = True)
 async def ник(ctx, member: discord.Member = None, *, nickname: str = None):
