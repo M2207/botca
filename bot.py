@@ -400,7 +400,6 @@ async def эмодзи(ctx, emoji: discord.Emoji):
     
 @client.command()
 @commands.has_permissions(administrator = True)
-
 async def help(ctx):
 
     emb = discord.Embed( title = 'Навигация по командам', color = discord.Colour.green() )
