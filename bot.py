@@ -11,6 +11,8 @@ import datetime
 PREFIX = '/'
 
 client = commands.Bot( command_prefix=PREFIX )
+client.remove_command( 'help' )
+
 @client.event
 async def on_ready(*args):
     print ( 'Бот Подключён!Можно работать.' )
