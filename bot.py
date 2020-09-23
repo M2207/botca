@@ -414,25 +414,7 @@ async def ник(ctx, member: discord.Member = None, *, nickname: str = None):
             await ctx.send(embed = discord.Embed(description = f"У пользователя **{member.name}** был изменен ник на **{nickname}**"))
     except:
         await ctx.send(embed = discord.Embed(description = f"Я не могу изменить ник пользователя **{member.name}**!"))
-@client.command()
-@commands.has_permissions(administrator = True)
-async def help(ctx):
 
-    emb = discord.Embed( title = 'Навигация по командам', color = discord.Colour.green() )
-
-    emb.add_field(name='{}clear'.format(PREFIX), value = 'Очистка чата')
-    emb.add_field(name='{}mute'.format(PREFIX), value = 'Временная блокировка чата')
-    emb.add_field(name='{}ban'.format(PREFIX), value = 'Ограничение доступа к серверу учасника')
-    emb.add_field(name='{}unban'.format(PREFIX), value = 'Открыть доступ к серверу учаснику который имел ограничение')
-    emb.add_field(name='{}avatar'.format(PREFIX), value = 'Аватар пользователя')
-    emb.add_field(name='{}ник'.format(PREFIX), value = 'Меняет ник пользователя')
-    emb.add_field(name='{}эмодзи'.format(PREFIX), value = 'Показывает информацию про эмодзи')
-    emb.add_field(name='{}'.format(PREFIX), value = '')
-    emb.add_field(name='{}'.format(PREFIX), value = '')
-
-    await ctx.send(embed = emb)
-
-    await ctx.message.delete(limit = 1)
 
 
 
