@@ -191,7 +191,7 @@ async def unmute_error(ctx, error):
 @commands.has_permissions( administrator = True)
 async def сказать(ctx, member: discord.Member = None, *, reason=None):
     await ctx.channel.purge( limit = 1 )
-    emb = discord.Embed(description= f'**<{reason}**', color=0x6fdb9e)
+    emb = discord.Embed(description= f'**{reason}**', color=0x6fdb9e)
     await member.send(embed=emb)
     
 
