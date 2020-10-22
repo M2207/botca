@@ -7,19 +7,29 @@ import sqlite3
 import os
 import time
 import datetime
+from pymongo import MongoClient
 
 PREFIX = '/'
 
 client = commands.Bot( command_prefix=PREFIX )
 client.remove_command( 'help' )
+cluster = MongoClient("mongodb+srv://ratbota:k9pjUobmXOomU2lw@cluster0.ehbzl.mongodb.net/ratbot?retryWrites=true&w=majority")
+collection = cluster.ratbot.ratbota
 
 @client.event
 async def on_ready(*args):
     print ( 'Бот Подключён!Можно работать.' )
-    type = discord.ActivityType.watching
-    activity = discord.Activity(name = "...", type = type)
-    status = discord.Status.dnd
-    await client.change_presence(activity = activity, status = status)
+    
+    for guild in client.guilds:
+        for member in guild.members:
+            post = {
+                "_id": member.id,
+                "xp": 0,
+                "lvl": 1
+            }
+            
+            if collection.count_documents({"_id: member.id"}) == 0:
+                collection.insert_one(post)
 
 
 
@@ -426,6 +436,26 @@ async def help(ctx):
     await ctx.send(embed = emb)
 
     await ctx.message.delete(limit = 1)    
+    
+    
+@client.event()
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    user = message.author
+    data = collection.find_one({"_id": user.id})
+
+    if data["xp"] == 500 + 100 * data["lvl"]:
+        collection.update_one({"_id": user.id},
+            {"$set": {"lvl": data["lvl"] + 1}})
+        collection.update_one({"_id": user.id},
+            {"$set": {"xp": 0}})
+
+        await message.channel.send(f"{user.mention} + 1 lvl")
+    else:
+        collection.update_one({"_id": user.id},
+            {"$set": {"xp": data["xp"] + 50}})
 
 
     
