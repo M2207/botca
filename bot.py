@@ -438,7 +438,7 @@ async def help(ctx):
     await ctx.message.delete(limit = 1)    
     
     
-@client.event()
+@client.event
 async def on_message(message):
     if message.author == client.user:
         return
