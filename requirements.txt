@@ -5,3 +5,4 @@ chardet
 asyncio
 nekos.py
 pymongo
+dnspython
