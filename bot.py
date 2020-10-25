@@ -18,19 +18,7 @@ collection = cluster.ratbot.ratbota
 
 @client.event
 async def on_ready(*args):
-    print ( 'Бот Подключён!Можно работать.' )
-    
-    for guild in client.guilds:
-        for member in guild.members:
-            post = {
-                "_id": member.id,
-                "xp": 0,
-                "lvl": 1
-            }
-            
-            if collection.count_documents({"_id: member.id"}) == 0:
-                collection.insert_one(post)
-
+    print ( 'Бот Подключён!Можно работать.') 
 
 
 @client.event
