@@ -7,14 +7,11 @@ import sqlite3
 import os
 import time
 import datetime
-from pymongo import MongoClient
 
 PREFIX = '/'
 
 client = commands.Bot( command_prefix=PREFIX )
 client.remove_command( 'help' )
-cluster = MongoClient("mongodb+srv://ratbota:k9pjUobmXOomU2lw@cluster0.ehbzl.mongodb.net/ratbot?retryWrites=true&w=majority")
-collection = cluster.ratbot.ratbota
 
 @client.event
 async def on_ready(*args):
