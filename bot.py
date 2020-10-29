@@ -10,7 +10,7 @@ import datetime
 
 PREFIX = '/'
 
-client = commands.Bot( command_prefix=PREFIX, intents = discord.Intents.all() )
+client = commands.Bot(command_prefix=PREFIX, intents = discord.Intents.all())
 client.remove_command( 'help' )
 
 @client.event
