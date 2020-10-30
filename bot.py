@@ -338,12 +338,7 @@ async def help(ctx):
 async def mcachievement(ctx, *, name:str = None):
   a = random.randint(1, 40)
   name2 = name.replace(' ', '+')
-  url = f'https://minecraftskinstealer.com/achievement/{a}/Achievement+Get%21/{name2}'
-  emb = discord.Embed(description = f'**[Achievement!]({url})**',color = 0xe00055, timestamp = ctx.message.created_at)
-  emb.set_footer(text = f"Requested by {ctx.author.name}", icon_url = ctx.author.avatar_url)
-  emb.set_image(url = url)
-  await ctx.send(embed=emb)
-
+  await ctx.send(f'https://minecraftskinstealer.com/achievement/{a}/Achievement+Get%21/{name2}')
   
 
 
