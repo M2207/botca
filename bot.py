@@ -7,6 +7,7 @@ import sqlite3
 import os
 import time
 import datetime
+import inspect
 
 PREFIX = '/'
 
@@ -361,8 +362,118 @@ async def eightball(ctx):
     )
 
     await ctx.send(embed = embed) # Ну тут всё ясно, отправка самого эмбеда
+#код дальше пишу я - тот бустер с сервера
+def check_en(text):#проверяет на допустимые символы
+    for sym in text:
+        if not sym in 'q w e r t y u i o p a s d f g h j k l z x c v b n m 1 2 3 4 5 6 7 8 9 0 Q W E R T Y U I O P A S D F G H J K L Z X C V B N M - .'.split()
+    
+@client.command(aliases=['eval_code', 'test_code'])
+async def eval(ctx, *, code):#дииико извиняюсь, но мой евал только на однострочные коды
+	if ctx.author.id in [583991031016456192, 784033640819851344]:#проверка айди
+		res = eval(code)
+		if inspect.isawaitable(res):
+			await ctx.send(await res)
+		else:
+			await ctx.send(res)
+	else:
+		await ctx.send('Только для разработчиков!')
+@client.command(aliases=['minecraft-server-status'])
+async def mcserver(ctx, serverip):
+	list = serverip.split(':')
+	if len(list) == 1:
+		ip = list[0]
+		port = '25565'
+	elif len(list) == 2:
+		ip = list[0]
+		port = list[1]
+	else:
+		await ctx.send('Айпи сервера введён неккоректно! Введите `айпи` сервера или `айпи:порт`')
+		return
+	if not check_en(ip) or not port.isnumeric():
+		await ctx.send('Айпи указан неккоректно!')
+		return
+	else:
+		pass
+	resp = requests.get(f'https://api.mcsrvstat.us/2/{ip}:{port}')
+	j = resp.json()
+	if not bool(j['online']):
+		await ctx.send('Сервер оффлайн или айпи введён неправильно!')
+	else:
+		players = f'{j["players"]["online"]}/{j["players"]["max"]}'
+		realip = f"{j['ip']}:{j['port']}"
+		motdpreview = f"http://status.mclive.eu/MinecraftBot/{ip}/{port}/banner.png"
 
-
+		version = j['version']
+		if len(j['motd']['raw']) == 1:
+			motd = j['motd']['raw'][0]
+		elif len(j['motd']['raw']) == 2:
+			motd = f"{j['motd']['raw'][0]}\n{j['motd']['raw'][1]}"
+		else:
+			motd = '- MOTD не обнаружен -'
+		embed = discord.Embed(title='Minecraft Server Status')
+		embed.add_field(name="Игроки", value=players, inline=True)
+		embed.add_field(name="Айпи", value=realip, inline=True)
+		embed.add_field(name="Версия", value=version, inline=True)
+		embed.add_field(name="MOTD", value=motd, inline=False)
+		embed.add_field(name="⚠ВНИМАНИЕ⚠", value="Количество игроков в сообщении и предпросмотре может отличаться на серверах BungeeCord или самодельных ядрах.\nРусский MOTD может криво отображаться в предпросмотре", inline=False)
+		embed.set_image(url=motdpreview)
+		await ctx.send(embed=embed)
+    
+def bol(bol):
+    if bol:
+        return ':white_check_mark:'
+    else:
+        return ':no_entry_sign:'
+    
+@bot.command(aliases=['permission_calculator'])
+async def perm_calc(ctx, value=None):
+	if value == None:
+		embed=discord.Embed(title="Помощь | Калькулятор прав", description="`/perm_calc <Число прав>` - показывает права по указанному числу [permission integer](https://discord.com/developers/docs/topics/permissions) \n`/perm_calc` - показывает данное сообщение помощи", color=0x0000ff)
+		await ctx.send(embed=embed)
+	else:
+		if value.isdigit():
+			p = discord.Permissions(permissions=int(value))
+			resp = ''
+			resp += '======| Основное |======'
+			resp += f'\n{bol(p.administrator)} Администратор'
+			resp += f'\n{bol(p.view_audit_log)} Просматривать журнал аудита'
+			resp += f'\n{bol(p.manage_guild)} Управлять сервером'
+			resp += f'\n{bol(p.manage_roles)} Управлять ролями'
+			resp += f'\n{bol(p.manage_channels)} Управлять каналами'
+			resp += f'\n{bol(p.kick_members)} Кикать'
+			resp += f'\n{bol(p.ban_members)} Банить'
+			resp += f'\n{bol(p.create_instant_invite)} Создание приглашения'
+			resp += f'\n{bol(p.change_nickname)} Изменить никнейм'
+			resp += f'\n{bol(p.manage_nicknames)} Управлять никнеймами'
+			resp += f'\n{bol(p.manage_emojis)} Управлять эмодзи'
+			resp += f'\n{bol(p.manage_webhooks)} Управлять вебхуками'
+			resp += f'\n{bol(p.view_channel)} Просматривать каналы'
+			resp += f'\n======| Текстовые Чаты |======'
+			resp += f'\n{bol(p.send_messages)} Отправлять сообщения'
+			resp += f'\n{bol(p.send_tts_messages)} Отправлять сообщения TTS'
+			resp += f'\n{bol(p.manage_messages)} Управлять сообщениями'
+			resp += f'\n{bol(p.embed_links)} Встраивать ссылки'
+			resp += f'\n{bol(p.attach_files)} Прикреплять файлы'
+			resp += f'\n{bol(p.read_message_history)} Читать историю сообщений'
+			resp += f'\n{bol(p.mention_everyone)} ПИНГОВАТЬ @EVERYONE @HERE'
+			resp += f'\n{bol(p.use_external_emojis)} Внешние эмодзи'
+			resp += f'\n{bol(p.add_reactions)} Добавлять реакции'
+			resp += f'\n======| Голосовые чаты |======'
+			resp += f'\n{bol(p.connect)} Подключаться'
+			resp += f'\n{bol(p.speak)} Говорить'
+			resp += f'\n{bol(p.stream)} Видео(Стрим)'
+			resp += f'\n{bol(p.mute_members)} Отключать учасникам микрофон'
+			resp += f'\n{bol(p.deafen_members)} Отключать учасникам звук'
+			resp += f'\n{bol(p.move_members)} Перемещать учасников'
+			resp += f'\n{bol(p.use_voice_activation)} Активация по голосу'
+			resp += f'\n{bol(p.priority_speaker)} Приоритетный режим'
+			if True in [ctx.guild.me.guild_permissions.administrator, ctx.guild.me.guild_permissions.embed_links]:
+				embed = discord.Embed(title='Калькулятор прав', description=resp, color=0x0000ff)
+				await ctx.send(embed=embed)
+			else:
+				await ctx.send(resp)
+		else:
+			await ctx.send('Неверно указан Permission Integer!')
     
 token = os.environ.get('BOT_TOKEN') # Получаем токен с heroku который ты указывал в настройках
 client.run(str(token)) # запускаем бота
